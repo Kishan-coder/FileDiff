@@ -1,0 +1,5 @@
+First Name,Last Name,Location,Title,EmployeeType,EmployeeID,Email Address,Is Bachelor,Change Type
+Gary,Hall,Tokyo,Payroll Manager,EMPLOYEE,GAHA26,gary.hall@xanadufinancials.com,False,CHANGED
+Jeremy,Price,New York,HR Administrator,CUSTOMER,JEPR76,jeremy.price@xanadufinancials.com,True,CHANGED
+Harry,Ramirez,Washington DC,HR Administrator,PARTNER,HARA70,harry.ramirez@xanadufinancials.com,True,DELETED
+Edward,Mar7nez,Los Angeles,Business Analyst,CUSTOMER,EDMA19,edward.mar7nez@xanadufinancials.com,True,ADDED
