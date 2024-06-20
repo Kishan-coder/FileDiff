@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.tuebora.filediff.domain.service.FileDiffProcessingService;
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-public class `qFileDiffApplication {
+public class FileDiffApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(FileDiffApplication.class, args);
