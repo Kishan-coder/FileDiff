@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.tuebora.filediff.domain.service.FileDiffProcessingService;
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class FileDiffApplication {
 
     public static void main(String[] args) {

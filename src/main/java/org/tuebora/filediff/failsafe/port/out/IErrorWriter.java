@@ -9,5 +9,6 @@ import java.io.IOException;
 //Either Input can have bad records or there can be error during writing of Output Records
 public interface IErrorWriter {
     void append(InputDiscardedRecord inputDiscardedRecord) throws IOException;
+
     void append(OutputDiscardedRecord outputDiscardedRecord) throws IOException;
 }

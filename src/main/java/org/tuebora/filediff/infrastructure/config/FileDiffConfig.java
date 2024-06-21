@@ -18,21 +18,24 @@ import java.io.IOException;
 public class FileDiffConfig {
     private final ErrorHandler errorHandler;
     private final String directoryPath;
+
     public FileDiffConfig(ErrorHandler errorHandler, @Value("${all.dir}") String directoryPath) {
         this.errorHandler = errorHandler;
         this.directoryPath = directoryPath;
     }
 
     @Bean
-    IReader<ID, InputUserRecord>  previousReader(@Value("${file.old}") String oldFileName) throws IOException {
-        return new CsvReader(directoryPath+oldFileName, errorHandler);
+    IReader<ID, InputUserRecord> previousReader(@Value("${file.old}") String oldFileName) throws IOException {
+        return new CsvReader(directoryPath + oldFileName, errorHandler);
     }
+
     @Bean
     IReader<ID, InputUserRecord> currentReader(@Value("${file.new}") String newFileName) throws IOException {
-        return new CsvReader(directoryPath+newFileName, errorHandler);
+        return new CsvReader(directoryPath + newFileName, errorHandler);
     }
+
     @Bean
     IWriter<OutputUserRecord> outputWriter(@Value("${file.output}") String outputFileName) throws IOException {
-        return new CsvWriter(directoryPath+outputFileName, errorHandler);
+        return new CsvWriter(directoryPath + outputFileName, errorHandler);
     }
 }

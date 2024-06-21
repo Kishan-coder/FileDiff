@@ -7,6 +7,7 @@ public enum EmployeeType {
     PARTNER,
     CONTRACTOR,
     EMPLOYEE;
+
     public static EmployeeType fromString(String type) {
         for (EmployeeType employeeType : EmployeeType.values()) {
             if (employeeType.toString().equalsIgnoreCase(type)) {

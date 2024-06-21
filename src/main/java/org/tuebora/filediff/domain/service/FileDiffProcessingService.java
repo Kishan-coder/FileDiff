@@ -30,9 +30,9 @@ public class FileDiffProcessingService {
 
     //business logic starts
     public void process() {
-        if (!previousReader.isCompatible(currentReader)){
+        if (!previousReader.isCompatible(currentReader)) {
             throw new IncompatibleInputSourcesException();
-        } else{
+        } else {
             outputWriter.init(currentReader.getSchemaHeader());
         }
         Map<ID, InputUserRecord> previousUserMap = previousReader.readAll();

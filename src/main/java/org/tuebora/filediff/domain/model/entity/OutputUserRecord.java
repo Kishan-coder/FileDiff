@@ -15,7 +15,7 @@ import java.util.Map;
 //Immutable InputUserRecord with id as record identifier and email, changeType as mandatory
 @Builder
 @Getter
-public final class OutputUserRecord implements Serializable{
+public final class OutputUserRecord implements Serializable {
     @Serial
     private static final long serialVersionUID = 2204465821087676969L;
 

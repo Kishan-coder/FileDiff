@@ -6,7 +6,6 @@ import lombok.NonNull;
 import org.tuebora.filediff.domain.model.vo.Email;
 import org.tuebora.filediff.domain.model.vo.EmployeeType;
 import org.tuebora.filediff.domain.model.vo.ID;
-import org.tuebora.filediff.domain.exception.InvalidUserRecordException;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,7 +14,7 @@ import java.util.Map;
 //Immutable InputUserRecord with id as record identifier and email as mandatory
 @Getter
 @Builder
-public final class InputUserRecord implements Serializable{
+public final class InputUserRecord implements Serializable {
     @Serial
     private static final long serialVersionUID = 407796278602936764L;
     @NonNull

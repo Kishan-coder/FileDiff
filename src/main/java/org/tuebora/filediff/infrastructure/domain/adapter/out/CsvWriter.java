@@ -31,7 +31,7 @@ public class CsvWriter implements IWriter<OutputUserRecord> {
     @Override
     public void append(OutputUserRecord outputUserRecord) {
         String[] values = new String[headers.size()];
-        for (int i=0;i<headers.size();i++) {
+        for (int i = 0; i < headers.size(); i++) {
             switch (headers.get(i)) {
                 case "EmployeeID":
                     values[i] = outputUserRecord.getId().getValue();
@@ -58,10 +58,10 @@ public class CsvWriter implements IWriter<OutputUserRecord> {
                     break;
             }
         }
-        for (int j = KNOWN_FIELDS_COUNT; j<values.length-1; j++) {
+        for (int j = KNOWN_FIELDS_COUNT; j < values.length - 1; j++) {
             values[j] = outputUserRecord.getOtherAttributes().get(headers.get(j));
         }
-        values[values.length-1] = outputUserRecord.getChangeType().name();
+        values[values.length - 1] = outputUserRecord.getChangeType().name();
         try {
             csvPrinter.printRecord(values);
             int i = currentBatchSize.incrementAndGet();

@@ -55,7 +55,7 @@ public class CsvReader implements IReader<ID, InputUserRecord> {
                     userMap.put(userRecordInput.getId(), userRecordInput);
                 }
             } catch (AbstractFileDiffException e) {
-                if (userRecordInput == null){
+                if (userRecordInput == null) {
                     e = new SourceNameWrapperException(e, fileName);
                 }
                 errorHandler.handle(userRecordInput, e);

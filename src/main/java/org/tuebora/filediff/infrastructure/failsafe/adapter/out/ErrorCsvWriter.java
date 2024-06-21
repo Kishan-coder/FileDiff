@@ -31,12 +31,12 @@ public class ErrorCsvWriter implements IErrorWriter {
     @Override
     public void append(InputDiscardedRecord inputDiscardedRecord) throws IOException {
         InputUserRecord inputUserRecord = inputDiscardedRecord.inputUserRecord();
-        if (inputUserRecord == null){
+        if (inputUserRecord == null) {
             csvPrinter.printRecord("Invalid InputUserRecord w/ Exception: " + inputDiscardedRecord.reason());
             flush();
             return;
         }
-        Collection<String> otherAttributeValues= inputUserRecord.getOtherAttributes().values();
+        Collection<String> otherAttributeValues = inputUserRecord.getOtherAttributes().values();
         List<String> values = getInputUserRecordAttributesAsStrings(inputUserRecord);
         List<String> allValues = new ArrayList<>();
         allValues.add("InputUserRecord");
@@ -50,7 +50,7 @@ public class ErrorCsvWriter implements IErrorWriter {
     @Override
     public void append(OutputDiscardedRecord outputDiscardedRecord) throws IOException {
         OutputUserRecord outputUserRecord = outputDiscardedRecord.outputUserRecord();
-        Collection<String> otherAttributeValues= outputUserRecord.getOtherAttributes().values();
+        Collection<String> otherAttributeValues = outputUserRecord.getOtherAttributes().values();
         List<String> values = getOutputUserRecordAttributesAsStrings(outputUserRecord);
         List<String> allValues = new ArrayList<>();
         allValues.add("OutputUserRecord");
@@ -77,7 +77,7 @@ public class ErrorCsvWriter implements IErrorWriter {
         return List.of(inputUserRecord.getFirstName(), inputUserRecord.getLastName(), inputUserRecord.getTitle(), inputUserRecord.getEmployeeType().name(), inputUserRecord.getLocation(), inputUserRecord.getId().getValue(), inputUserRecord.getEmail().address());
     }
 
-    private List<String>  getOutputUserRecordAttributesAsStrings(OutputUserRecord outputUserRecord) {
+    private List<String> getOutputUserRecordAttributesAsStrings(OutputUserRecord outputUserRecord) {
         return List.of(outputUserRecord.getFirstName(), outputUserRecord.getLastName(), outputUserRecord.getTitle(), outputUserRecord.getEmployeeType().name(), outputUserRecord.getLocation(), outputUserRecord.getId().getValue(), outputUserRecord.getEmail().address());
     }
 }
