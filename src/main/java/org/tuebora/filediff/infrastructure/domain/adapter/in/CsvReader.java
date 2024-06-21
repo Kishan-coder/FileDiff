@@ -39,6 +39,7 @@ public class CsvReader implements IReader<ID, InputUserRecord> {
         this.fileName = fileName;
     }
 
+    //Pre Processing then Loading
     @Override
     public Map<ID, InputUserRecord> readAll() {
         Map<ID, InputUserRecord> userMap = new HashMap<>();

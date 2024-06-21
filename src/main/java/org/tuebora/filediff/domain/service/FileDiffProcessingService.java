@@ -11,7 +11,6 @@ import org.tuebora.filediff.domain.port.in.IReader;
 import org.tuebora.filediff.domain.port.out.IWriter;
 import org.tuebora.filediff.failsafe.ErrorHandler;
 
-import java.io.IOException;
 import java.util.Map;
 
 //This is the domain service class where all the business logic resides

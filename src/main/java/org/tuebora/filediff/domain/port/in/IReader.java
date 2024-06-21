@@ -10,4 +10,9 @@ public interface IReader<K, V> {
     boolean isCompatible(IReader<K, V> reader);
     //fetched input source schema
     List<String> getSchemaHeader();
+
+    //future scope is to extend IReader to readAll Into Redis
+    //Redis will be helpful when the file size grow significantly enough to exceed Internal Memory
+    //void readAllIntoCache()
 }
+

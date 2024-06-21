@@ -9,31 +9,30 @@ import org.tuebora.filediff.domain.model.vo.ID;
 import org.tuebora.filediff.domain.port.in.IReader;
 import org.tuebora.filediff.domain.port.out.IWriter;
 import org.tuebora.filediff.failsafe.ErrorHandler;
-import org.tuebora.filediff.failsafe.port.out.IErrorWriter;
 import org.tuebora.filediff.infrastructure.domain.adapter.in.CsvReader;
 import org.tuebora.filediff.infrastructure.domain.adapter.out.CsvWriter;
-import org.tuebora.filediff.infrastructure.failsafe.adapter.out.ErrorCsvWriter;
 
 import java.io.IOException;
 
 @Configuration
 public class FileDiffConfig {
     private final ErrorHandler errorHandler;
-
-    public FileDiffConfig(ErrorHandler errorHandler) {
+    private final String directoryPath;
+    public FileDiffConfig(ErrorHandler errorHandler, @Value("${all.dir}") String directoryPath) {
         this.errorHandler = errorHandler;
+        this.directoryPath = directoryPath;
     }
 
     @Bean
     IReader<ID, InputUserRecord>  previousReader(@Value("${file.old}") String oldFileName) throws IOException {
-        return new CsvReader(oldFileName, errorHandler);
+        return new CsvReader(directoryPath+oldFileName, errorHandler);
     }
     @Bean
     IReader<ID, InputUserRecord> currentReader(@Value("${file.new}") String newFileName) throws IOException {
-        return new CsvReader(newFileName, errorHandler);
+        return new CsvReader(directoryPath+newFileName, errorHandler);
     }
     @Bean
     IWriter<OutputUserRecord> outputWriter(@Value("${file.output}") String outputFileName) throws IOException {
-        return new CsvWriter(outputFileName, errorHandler);
+        return new CsvWriter(directoryPath+outputFileName, errorHandler);
     }
 }
