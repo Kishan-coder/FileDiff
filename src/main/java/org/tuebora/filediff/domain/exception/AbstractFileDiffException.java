@@ -5,7 +5,7 @@ public class AbstractFileDiffException extends RuntimeException{
     final int errorCode;
 
     public AbstractFileDiffException(String message, int errorCode) {
-        super(String.format("%s [%d]", message, errorCode));
+        super(errorCode == 0 ? message: String.format("%s [%d]", message, errorCode));
         this.message = message;
         this.errorCode = errorCode;
     }

@@ -13,10 +13,10 @@ public class ID {
 
     private static void validateId(String id) {
         if (id == null || id.isEmpty()) {
-            throw new InvalidUserRecordException("ID must not be null or empty");
+            throw new InvalidUserRecordException("ID must not be null or empty: " + id);
         }
         if (id.length() != 6){
-            throw new InvalidUserRecordException("ID must be 6 characters long");
+            throw new InvalidUserRecordException("ID must be 6 characters long: " + id);
         }
         for (int i=0; i<4; i++) {
             if (!Character.isUpperCase(id.charAt(i))) {

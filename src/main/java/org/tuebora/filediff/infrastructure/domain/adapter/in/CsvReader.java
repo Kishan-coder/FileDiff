@@ -3,6 +3,9 @@ package org.tuebora.filediff.infrastructure.domain.adapter.in;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.tuebora.filediff.domain.exception.AbstractFileDiffException;
+import org.tuebora.filediff.domain.exception.DuplicateUserRecordException;
+import org.tuebora.filediff.domain.exception.FileNameWrapperException;
 import org.tuebora.filediff.domain.model.entity.InputUserRecord;
 import org.tuebora.filediff.domain.model.vo.Email;
 import org.tuebora.filediff.domain.model.vo.EmployeeType;
@@ -23,24 +26,39 @@ public class CsvReader implements IReader<ID, InputUserRecord> {
     private final List<String> headers;
     private final Iterator<CSVRecord> csvIterator;
     private final ErrorHandler errorHandler;
-    public CsvReader(String fileName, ErrorHandler errorHandler) throws IOException{
+    private final String fileName;
+
+    public CsvReader(String fileName, ErrorHandler errorHandler) throws IOException {
         CSVParser parser = CSVParser.parse(new FileReader(fileName), CSVFormat.DEFAULT.builder().setHeader().build());
-        csvIterator  = parser.iterator();
+        csvIterator = parser.iterator();
         if (!csvIterator.hasNext()) {
             throw new IllegalArgumentException("CSV FILE EMPTY!!!");
         }
         headers = parser.getHeaderNames();
         this.errorHandler = errorHandler;
+        this.fileName = fileName;
     }
-
 
     @Override
     public Map<ID, InputUserRecord> readAll() {
         Map<ID, InputUserRecord> userMap = new HashMap<>();
         while (csvIterator.hasNext()) {
             CSVRecord userRecord = csvIterator.next();
-            InputUserRecord userRecordInput = getUserRecord( userRecord);
-            userMap.put(userRecordInput.getId(), userRecordInput);
+            InputUserRecord userRecordInput = null;
+            try {
+                userRecordInput = getUserRecord(userRecord);
+                if (userRecordInput != null) {
+                    if (userMap.containsKey(userRecordInput.getId())) {
+                        throw new DuplicateUserRecordException(fileName);
+                    }
+                    userMap.put(userRecordInput.getId(), userRecordInput);
+                }
+            } catch (AbstractFileDiffException e) {
+                if (userRecordInput == null){
+                    e = new FileNameWrapperException(e, fileName);
+                }
+                errorHandler.handle(userRecordInput, e);
+            }
         }
         return userMap;
     }
@@ -98,12 +116,8 @@ public class CsvReader implements IReader<ID, InputUserRecord> {
                     otherAttributes.put(header, userRecord.get(header));
             }
         }
-        try {
-            inputUserRecord = InputUserRecord.builder().id(new ID(id)).email(new Email(emailAddress))
-                    .firstName(firstName).lastName(lastName).location(location).employeeType(EmployeeType.fromString(type)).title(title).otherAttributes(otherAttributes).build();
-        } catch (Exception e){
-            errorHandler.handle(inputUserRecord, e);
-        }
+        inputUserRecord = InputUserRecord.builder().id(new ID(id)).email(new Email(emailAddress))
+                .firstName(firstName).lastName(lastName).location(location).employeeType(EmployeeType.fromString(type)).title(title).otherAttributes(otherAttributes).build();
         return inputUserRecord;
     }
 

@@ -31,6 +31,11 @@ public class ErrorCsvWriter implements IErrorWriter {
     @Override
     public void append(InputDiscardedRecord inputDiscardedRecord) throws IOException {
         InputUserRecord inputUserRecord = inputDiscardedRecord.inputUserRecord();
+        if (inputUserRecord == null){
+            csvPrinter.printRecord("Invalid InputUserRecord w/ Exception: " + inputDiscardedRecord.reason());
+            flush();
+            return;
+        }
         Collection<String> otherAttributeValues= inputUserRecord.getOtherAttributes().values();
         List<String> values = getInputUserRecordAttributesAsStrings(inputUserRecord);
         List<String> allValues = new ArrayList<>();

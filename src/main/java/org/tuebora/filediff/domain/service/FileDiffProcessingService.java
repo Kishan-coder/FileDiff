@@ -30,7 +30,7 @@ public class FileDiffProcessingService {
     }
 
     //business logic starts
-    public void process() throws IOException {
+    public void process() {
         if (!previousReader.isCompatible(currentReader)){
             throw new IncompatibleInputSourcesException();
         } else{
