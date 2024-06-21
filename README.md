@@ -46,7 +46,7 @@ Max Records Per File = 500,000\
 Total Records = 1,000,000\
 Max attributes = 26\
 Size of An attribute = ~10B\
-Size of a record = 10*26 + OverHead Bytes = ~500B\
+Size of a record = 10x26 + OverHead Bytes = ~500B\
 Size of all records = 500*1,000,000 = 500 MB
 
 Since modern day computers have enough RAM, I assume that the running service won't chock with even ~1 GB memory in-use so I implemented via HashMap.\
