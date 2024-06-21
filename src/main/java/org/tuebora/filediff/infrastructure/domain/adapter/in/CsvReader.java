@@ -5,7 +5,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.tuebora.filediff.domain.exception.AbstractFileDiffException;
 import org.tuebora.filediff.domain.exception.DuplicateUserRecordException;
-import org.tuebora.filediff.domain.exception.FileNameWrapperException;
+import org.tuebora.filediff.domain.exception.SourceNameWrapperException;
 import org.tuebora.filediff.domain.model.entity.InputUserRecord;
 import org.tuebora.filediff.domain.model.vo.Email;
 import org.tuebora.filediff.domain.model.vo.EmployeeType;
@@ -55,7 +55,7 @@ public class CsvReader implements IReader<ID, InputUserRecord> {
                 }
             } catch (AbstractFileDiffException e) {
                 if (userRecordInput == null){
-                    e = new FileNameWrapperException(e, fileName);
+                    e = new SourceNameWrapperException(e, fileName);
                 }
                 errorHandler.handle(userRecordInput, e);
             }
