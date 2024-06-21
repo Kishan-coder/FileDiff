@@ -50,7 +50,7 @@ Size of a record = 10x26 + OverHead Bytes = ~500B\
 Size of all records = 500*1,000,000 = 500 MB
 
 Since modern day computers have enough RAM, I assume that the running service won't chock with even ~1 GB memory in-use so I implemented via HashMap.\
-A better consideration could be to use Redis as Persistent Cache which would contribute higher latency due to Disk I/O but might be the only solution we file can't be loaded in-memory.
+A better consideration could be to use Redis as Persistent Cache which would contribute higher latency due to Disk I/O but might be the only solution when file can't be loaded in-memory.
 
 ## Following Domain Driven Design
 Application is structured into: \
